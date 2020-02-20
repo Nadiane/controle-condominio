@@ -2,10 +2,12 @@ package br.com.nwaa.controlecondominio.servico;
 
 import br.com.nwaa.controlecondominio.dominio.Proprietario;
 import br.com.nwaa.controlecondominio.repositorio.IProprietarioRepositorio;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Properties;
 
 @Service
 public class ProprietarioServico {
@@ -40,4 +42,7 @@ public class ProprietarioServico {
         proprietarioRepositorio.delete(proprietario);
     }
 
+    public Proprietario atualizarProprietario(Proprietario proprietario) {
+        return proprietarioRepositorio.save(proprietario);
+    }
 }

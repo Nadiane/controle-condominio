@@ -26,9 +26,5 @@ public class Endereco {
     private String municipio;
     private String estado;
     private String cep;
-    private String bloco;
-    private String andar;
 
-/*    @OneToOne(mappedBy = "endereco")
-    private Proprietario proprietario;*/
 }

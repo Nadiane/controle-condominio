@@ -44,28 +44,15 @@ public class ProprietarioControle {
         return new ResponseEntity<>(proprietario, HttpStatus.OK);
     }
 
-/*    @DeleteMapping(value = {"/deletar/{id}"})
-    public ResponseEntity<?> removerProprietarioPorId(@PathVariable Long id){
-        return proprietarioServico.consultarProprietarioPorId(id).map( resultado -> {
-            proprietarioServico.removerProprietarioPorId(id);
-            return ResponseEntity.ok().build();
-        }).orElse(ResponseEntity.notFound().build());
-    }*/
-
-/*    @DeleteMapping(path = {"/{id}"})
-    public ResponseEntity removerProprietarioPorId(@PathVariable Long id) {
-        if (!proprietarioServico.consultarProprietarioPorId(id).isPresent()) {
-            log.error("Id " + id + " logis not existed");
-            ResponseEntity.badRequest().build();
-        }
-        proprietarioServico.removerProprietarioPorId(id);
-        return ResponseEntity.ok().build();
-    }*/
-
     @DeleteMapping
-    public ResponseEntity<?> removerCliente(@RequestBody Proprietario proprietario) {
+    public ResponseEntity<?> removerProprietario(@RequestBody Proprietario proprietario) {
         proprietarioServico.removerProprietario(proprietario);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PutMapping()
+    public ResponseEntity<Proprietario> altualizarProprietario(@RequestBody Proprietario proprietario){
+        return new ResponseEntity<>(proprietarioServico.atualizarProprietario(proprietario), HttpStatus.OK);
     }
 
 }
