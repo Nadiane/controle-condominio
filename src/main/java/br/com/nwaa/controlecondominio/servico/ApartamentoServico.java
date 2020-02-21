@@ -1,6 +1,8 @@
 package br.com.nwaa.controlecondominio.servico;
 
 import br.com.nwaa.controlecondominio.dominio.Apartamento;
+import br.com.nwaa.controlecondominio.dominio.Proprietario;
+import br.com.nwaa.controlecondominio.excecao.DadoNaoEncontradoExcecao;
 import br.com.nwaa.controlecondominio.repositorio.IApartamentoRepositorio;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +19,10 @@ public class ApartamentoServico {
     }
 
     public List<Apartamento> listarTodos() {
-        return apartamentoRepositorio.findAll();
+        List<Apartamento> apartamentos = apartamentoRepositorio.findAll();
+        if(apartamentos.isEmpty())
+            throw new DadoNaoEncontradoExcecao();
+        return apartamentos;
     }
 
     public List<Apartamento> consultarApartamentoPorNome(String nome) {

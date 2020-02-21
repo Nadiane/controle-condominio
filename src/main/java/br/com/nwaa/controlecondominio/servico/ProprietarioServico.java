@@ -1,6 +1,8 @@
 package br.com.nwaa.controlecondominio.servico;
 
 import br.com.nwaa.controlecondominio.dominio.Proprietario;
+import br.com.nwaa.controlecondominio.excecao.DadoNaoCadastradoExcecao;
+import br.com.nwaa.controlecondominio.excecao.DadoNaoEncontradoExcecao;
 import br.com.nwaa.controlecondominio.repositorio.IProprietarioRepositorio;
 import org.springframework.stereotype.Service;
 
@@ -17,19 +19,31 @@ public class ProprietarioServico {
     }
 
     public List<Proprietario> listarTodos() {
-        return proprietarioRepositorio.findAll();
+        List<Proprietario> proprietarios = proprietarioRepositorio.findAll();
+        if(proprietarios.isEmpty())
+            throw new DadoNaoEncontradoExcecao();
+        return proprietarios;
     }
 
-    public Proprietario consultarProprietarioPorNome(String nome) {
-        return proprietarioRepositorio.findByNomeIgnoreCaseContaining(nome);
+    public List<Proprietario> consultarProprietarioPorNome(String nome) {
+        List<Proprietario> proprietarios = proprietarioRepositorio.findByNomeIgnoreCaseContaining(nome);
+        if(proprietarios.isEmpty())
+            throw new DadoNaoEncontradoExcecao();
+        return proprietarios;
     }
 
     public Optional<Proprietario> consultarProprietarioPorId(Long id) {
-        return proprietarioRepositorio.findById(id);
+        Optional<Proprietario> proprietarios = proprietarioRepositorio.findById(id);
+        if(!proprietarios.isPresent())
+            throw new DadoNaoEncontradoExcecao();
+        return proprietarios;
     }
 
     public Proprietario inserirProprietario(Proprietario proprietario) {
-        return proprietarioRepositorio.save(proprietario);
+        Proprietario proprietarioSalvo = proprietarioRepositorio.save(proprietario);
+        if(proprietarioSalvo.getId() == null)
+            throw new DadoNaoCadastradoExcecao();
+        return proprietario;
     }
 
     public void removerProprietario(Proprietario proprietario) {

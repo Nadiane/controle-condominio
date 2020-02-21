@@ -31,7 +31,7 @@ public class ApartamentoControle {
                 inserirApartamento(apartamento), HttpStatus.CREATED);
     }
 
-    @GetMapping(path = {"/{nome}"})
+    @GetMapping(path = {"/nome/{nome}"})
     public ResponseEntity<?> consultarApartamentoPorNome(@PathVariable(value = "nome") String nome){
         return new ResponseEntity<>(apartamentoServico.consultarApartamentoPorNome(nome), HttpStatus.OK);
     }

@@ -30,7 +30,7 @@ public class ProprietarioControle {
         return new ResponseEntity<>(proprietarioServico.inserirProprietario(proprietario), HttpStatus.CREATED);
     }
 
-    @GetMapping(path = {"/{nome}"})
+    @GetMapping(path = {"/nome/{nome}"})
     public ResponseEntity<?> consultarProprietarioPorNome(@PathVariable(value = "nome") String nome){
         return new ResponseEntity<>(proprietarioServico.consultarProprietarioPorNome(nome), HttpStatus.OK);
     }
