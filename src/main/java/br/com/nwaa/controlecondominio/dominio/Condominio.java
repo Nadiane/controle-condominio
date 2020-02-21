@@ -20,11 +20,11 @@ public class Condominio implements Serializable {
 
     private String nome;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "endereco_id")
     private Endereco endereco;
 
-    private SituacaoEnum situacao;
+    private String situacao;
 
     @Column(name = "quantidade_funcionario")
     private Integer quantidadeFuncionario;
@@ -32,7 +32,7 @@ public class Condominio implements Serializable {
     @Column(name = "total_unidades")
     private Integer totalUnidades;
 
-    @OneToMany(mappedBy = "condominio")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "condominio")
     private List<Apartamento> apartamentos;
 
 }

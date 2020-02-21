@@ -27,13 +27,13 @@ public class ApartamentoControle {
 
     @PostMapping
     public ResponseEntity<?> inserirApartamento(@Valid @RequestBody Apartamento apartamento) {
-        return new ResponseEntity<>(apartamentoServico.inserirApartamento(apartamento), HttpStatus.CREATED);
+        return new ResponseEntity<>(apartamentoServico.
+                inserirApartamento(apartamento), HttpStatus.CREATED);
     }
 
     @GetMapping(path = {"/{nome}"})
     public ResponseEntity<?> consultarApartamentoPorNome(@PathVariable(value = "nome") String nome){
-        Apartamento apartamento = apartamentoServico.consultarApartamentoPorNome(nome);
-        return new ResponseEntity<>(apartamento, HttpStatus.OK);
+        return new ResponseEntity<>(apartamentoServico.consultarApartamentoPorNome(nome), HttpStatus.OK);
     }
 
     @GetMapping(path = {"/{id}"})

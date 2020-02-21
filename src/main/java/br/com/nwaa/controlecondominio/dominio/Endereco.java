@@ -19,8 +19,7 @@ public class Endereco implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private LogradouroEnum logradouro;
-    private String endereco;
+    private String logradouro;
     private Integer numero;
     private String complemento;
     private String bairro;

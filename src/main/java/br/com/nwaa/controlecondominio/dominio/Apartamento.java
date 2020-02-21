@@ -19,11 +19,11 @@ public class Apartamento implements Serializable {
 
     private String nome;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "proprietario_id")
     private Proprietario proprietario;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "condominio_id")
     private Condominio condominio;
 
