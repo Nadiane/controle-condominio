@@ -3,6 +3,7 @@ package br.com.nwaa.controlecondominio.dominio;
 import lombok.*;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 @AllArgsConstructor
@@ -10,7 +11,7 @@ import java.util.List;
 @Data
 @Entity
 @Table(name = "tb_apartamento")
-public class Apartamento {
+public class Apartamento implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

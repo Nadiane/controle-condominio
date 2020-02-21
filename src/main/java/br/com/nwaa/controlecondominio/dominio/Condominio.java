@@ -4,6 +4,7 @@ import br.com.nwaa.controlecondominio.enuns.SituacaoEnum;
 import lombok.*;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 @AllArgsConstructor
@@ -11,7 +12,7 @@ import java.util.List;
 @Data
 @Entity
 @Table(name = "tb_condominio")
-public class Condominio {
+public class Condominio implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface IProprietarioRepositorio extends JpaRepository<Proprietario, Long> {
 
-    public Proprietario findByNome(String nome);
+    public Proprietario findByNomeIgnoreCaseContaining(String nome);
 }

@@ -10,12 +10,10 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
-@SuppressWarnings("ALL")
 @RestController
 @RequestMapping({"/api/v1/proprietarios"})
 public class ProprietarioControle {
 
-    /*@Autowired*/
     private final ProprietarioServico proprietarioServico;
 
     public ProprietarioControle(ProprietarioServico proprietarioServico) {
@@ -34,14 +32,12 @@ public class ProprietarioControle {
 
     @GetMapping(path = {"/{nome}"})
     public ResponseEntity<?> consultarProprietarioPorNome(@PathVariable(value = "nome") String nome){
-        Proprietario proprietario = proprietarioServico.consultarProprietarioPorNome(nome);
-        return new ResponseEntity<>(proprietario, HttpStatus.OK);
+        return new ResponseEntity<>(proprietarioServico.consultarProprietarioPorNome(nome), HttpStatus.OK);
     }
 
     @GetMapping(path = {"/{id}"})
     public ResponseEntity<?> consultarProprietarioPorId(@PathVariable(value = "id") Long id){
-        Optional<Proprietario> proprietario = proprietarioServico.consultarProprietarioPorId(id);
-        return new ResponseEntity<>(proprietario, HttpStatus.OK);
+        return new ResponseEntity<>(proprietarioServico.consultarProprietarioPorId(id), HttpStatus.OK);
     }
 
     @DeleteMapping
