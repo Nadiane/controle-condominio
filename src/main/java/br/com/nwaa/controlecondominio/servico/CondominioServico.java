@@ -1,7 +1,10 @@
 package br.com.nwaa.controlecondominio.servico;
 
+import br.com.nwaa.controlecondominio.dominio.Apartamento;
 import br.com.nwaa.controlecondominio.dominio.Condominio;
 import br.com.nwaa.controlecondominio.dominio.Proprietario;
+import br.com.nwaa.controlecondominio.excecao.DadoNaoCadastradoExcecao;
+import br.com.nwaa.controlecondominio.excecao.DadoNaoEncontradoExcecao;
 import br.com.nwaa.controlecondominio.repositorio.ICondominioRepositorio;
 import br.com.nwaa.controlecondominio.repositorio.IProprietarioRepositorio;
 import org.springframework.stereotype.Service;
@@ -19,15 +22,24 @@ public class CondominioServico {
     }
 
     public List<Condominio> listarTodos() {
-        return condominioRepositorio.findAll();
+        List<Condominio> condominios = condominioRepositorio.findAll();
+        if(condominios.isEmpty())
+            throw new DadoNaoEncontradoExcecao();
+        return condominios;
     }
 
     public Optional<Condominio> consultarCondominioPorId(Long id) {
-        return condominioRepositorio.findById(id);
+        Optional<Condominio> condominios = condominioRepositorio.findById(id);
+        if(!condominios.isPresent())
+            throw new DadoNaoEncontradoExcecao();
+        return condominios;
     }
 
     public Condominio inserirCondominio(Condominio condominio) {
-        return condominioRepositorio.save(condominio);
+        Condominio condominioSalvo = condominioRepositorio.save(condominio);
+        if(condominioSalvo.getId() == null)
+            throw new DadoNaoCadastradoExcecao();
+        return condominioSalvo;
     }
 
     public void removerCondominio(Condominio condominio) {

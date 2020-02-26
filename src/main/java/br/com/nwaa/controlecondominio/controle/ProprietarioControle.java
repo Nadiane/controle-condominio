@@ -46,7 +46,13 @@ public class ProprietarioControle {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PutMapping()
+    @DeleteMapping(path = {"/id/{id}"})
+    public ResponseEntity<?> removerProprietarioPorId(@PathVariable Long id) {
+        proprietarioServico.removerProprietario(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PutMapping
     public ResponseEntity<Proprietario> altualizarProprietario(@RequestBody Proprietario proprietario){
         return new ResponseEntity<>(proprietarioServico.atualizarProprietario(proprietario), HttpStatus.OK);
     }

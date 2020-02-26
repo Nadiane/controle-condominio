@@ -2,6 +2,7 @@ package br.com.nwaa.controlecondominio.servico;
 
 import br.com.nwaa.controlecondominio.dominio.Apartamento;
 import br.com.nwaa.controlecondominio.dominio.Proprietario;
+import br.com.nwaa.controlecondominio.excecao.DadoNaoCadastradoExcecao;
 import br.com.nwaa.controlecondominio.excecao.DadoNaoEncontradoExcecao;
 import br.com.nwaa.controlecondominio.repositorio.IApartamentoRepositorio;
 import org.springframework.stereotype.Service;
@@ -26,22 +27,40 @@ public class ApartamentoServico {
     }
 
     public List<Apartamento> consultarApartamentoPorNome(String nome) {
-        return apartamentoRepositorio.findByNomeIgnoreCaseContaining(nome);
+        List<Apartamento> apartamentos = apartamentoRepositorio.findByNomeIgnoreCaseContaining(nome);
+        if(apartamentos.isEmpty())
+            throw new DadoNaoEncontradoExcecao();
+        return apartamentos;
     }
 
     public Optional<Apartamento> consultarApartamentoPorId(Long id) {
-        return apartamentoRepositorio.findById(id);
+        Optional<Apartamento> apartamentos = apartamentoRepositorio.findById(id);
+        if(!apartamentos.isPresent())
+            throw new DadoNaoEncontradoExcecao();
+        return apartamentos;
     }
 
     public Apartamento inserirApartamento(Apartamento apartamento) {
-        return apartamentoRepositorio.save(apartamento);
+        Apartamento apartamentoSalvo = apartamentoRepositorio.save(apartamento);
+        if(apartamentoSalvo.getId() == null)
+            throw new DadoNaoCadastradoExcecao();
+        return apartamentoSalvo;
     }
 
-    public void removerProprietario(Apartamento apartamento) {
+    public void removerApartamentoPorId(Long id) {
+        Optional<Apartamento> apartamento = apartamentoRepositorio.findById(id);
+        apartamentoRepositorio.delete(apartamento.get());
+    }
+
+    public void removerApartamento(Apartamento apartamento) {
         apartamentoRepositorio.delete(apartamento);
     }
 
     public Apartamento atualizarApartamento(Apartamento apartamento) {
         return apartamentoRepositorio.save(apartamento);
+    }
+
+    public List<Apartamento> consultarApartamentoPorPropietario(Proprietario proprietario){
+        return apartamentoRepositorio.findByProprietario(proprietario);
     }
 }

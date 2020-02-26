@@ -1,6 +1,5 @@
 package br.com.nwaa.controlecondominio.dominio;
 
-import br.com.nwaa.controlecondominio.enuns.LogradouroEnum;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

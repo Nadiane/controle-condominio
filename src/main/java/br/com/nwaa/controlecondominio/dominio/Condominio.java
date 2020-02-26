@@ -19,11 +19,6 @@ public class Condominio implements Serializable {
     private Long id;
 
     private String nome;
-
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "endereco_id")
-    private Endereco endereco;
-
     private String situacao;
 
     @Column(name = "quantidade_funcionario")

@@ -44,7 +44,13 @@ public class ApartamentoControle {
 
     @DeleteMapping
     public ResponseEntity<?> removerApartamento(@RequestBody Apartamento apartamento) {
-        apartamentoServico.removerProprietario(apartamento);
+        apartamentoServico.removerApartamento(apartamento);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @DeleteMapping(path = {"/id/{id}"})
+    public ResponseEntity<?> removerApartamentoPorId(@PathVariable Long id) {
+        apartamentoServico.removerApartamentoPorId(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

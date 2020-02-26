@@ -50,6 +50,11 @@ public class ProprietarioServico {
         proprietarioRepositorio.delete(proprietario);
     }
 
+    public void removerProprietario(Long id) {
+        Optional<Proprietario> proprietario = proprietarioRepositorio.findById(id);
+        proprietarioRepositorio.delete(proprietario.get());
+    }
+
     public Proprietario atualizarProprietario(Proprietario proprietario) {
         return proprietarioRepositorio.save(proprietario);
     }

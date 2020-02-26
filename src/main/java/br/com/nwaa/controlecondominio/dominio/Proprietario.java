@@ -20,15 +20,14 @@ public class Proprietario implements Serializable {
     private Long id;
 
     private String nome;
-
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY,  mappedBy = "proprietario")
-    private List<Apartamento> apartamentos;
+    private String email;
+    private String telefone;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "endereco_id")
     private Endereco endereco;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "proprietario")
-    private List<Telefone> telefones;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY,  mappedBy = "proprietario")
+    private List<Apartamento> apartamentos;
 
 }
